@@ -32,8 +32,12 @@ public class Stock {
     public void decreaseMagnum(){
         this.magnum--;
     }
-    public void decreaseBalls(){
-        this.balls--;
+    public void decreaseBalls(int amount){
+        if(balls >= amount){
+            balls -= amount;
+        } else {
+            throw new NoMoreIceCreamException("Not enough ice cream balls in stock!");
+        }
     }
 
 }

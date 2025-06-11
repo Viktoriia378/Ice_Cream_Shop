@@ -8,14 +8,8 @@ public class Cone implements Eateble{
     }
     private Flavor[] balls;
 
-    public Cone(){
-
-    }
-    public Cone(Flavor[] balls){
-        this.balls = balls;
-    }
+    public Cone(){}
+    public Cone(Flavor[] balls){this.balls = balls;}
     @Override
-    public void eat() {
-        System.out.println("Eating a " + Arrays.toString(balls) + " magnum.");
-    }
+    public void eat() {System.out.println("Eating a " + Arrays.toString(balls) + " magnum.");}
 }

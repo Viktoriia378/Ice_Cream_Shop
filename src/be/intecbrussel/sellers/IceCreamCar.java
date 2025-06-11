@@ -7,20 +7,23 @@ public class IceCreamCar implements IceCreamSeller{
     private double profit;
     private Stock stock;
 
-    public IceCreamCar(PriceList priceList, double profit, Stock stock) {
+    public IceCreamCar(PriceList priceList, Stock stock) {
         this.priceList = priceList;
-        this.profit = 0;
         this.stock = stock;
     }
 
     @Override
-    public Cone orderCone(Cone.Flavor[] balls) {
+    public Cone orderCone(Cone.Flavor[] flavors) {
         if(stock.getCones() <= 0){
             throw new NoMoreIceCreamException("No more cones in stock!");
         }
-        Cone cone = prepareCone(balls);
-        profit += balls.length * priceList.getBallPrice();
-        return cone;
+        if(stock.getBalls() <= 0){
+            throw new NoMoreIceCreamException("No more ice balls in stick!");
+        }
+        stock.decreaseCones();
+        stock.decreaseBalls(flavors.length);
+        profit += flavors.length * priceList.getBallPrice();
+        return prepareCone(flavors);
     }
 
     @Override
@@ -28,9 +31,9 @@ public class IceCreamCar implements IceCreamSeller{
         if(stock.getIceRockets() <= 0){
             throw new NoMoreIceCreamException("No more ice rocket in stock!");
         }
-        IceRocket iceRocket = prepareRocket();
+        stock.decreaseRockets();
         profit += priceList.getRocketPrice();
-        return iceRocket;
+        return prepareRocket();
     }
 
     @Override
@@ -38,26 +41,22 @@ public class IceCreamCar implements IceCreamSeller{
         if(stock.getMagnum() <= 0){
             throw new NoMoreIceCreamException("No more magnum in stock!");
         }
-        Magnum magnum = prepareMagnum(type);
+        stock.decreaseMagnum();
         profit += priceList.getMagnumPrice(type);
-        return magnum;
+        return prepareMagnum(type);
     }
 
     @Override
     public double getProfit() {
         return 0;
     }
-    private Cone prepareCone(Cone.Flavor[] balls){
-        stock.decreaseCones();
-        stock.decreaseBalls();
-        return new Cone(balls);
+    private Cone prepareCone(Cone.Flavor[] flavors){
+        return new Cone(flavors);
     }
     private IceRocket prepareRocket(){
-        stock.decreaseRockets();
         return new IceRocket();
     }
     private Magnum prepareMagnum(Magnum.MagnumType type){
-        stock.decreaseMagnum();
         return new Magnum(type);
     }
 }
