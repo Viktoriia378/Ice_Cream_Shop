@@ -6,6 +6,12 @@ public class Stock {
     private int balls;
     private int magnum;
 
+    public Stock(int iceRockets, int cones, int balls, int magnum) {
+        this.iceRockets = iceRockets;
+        this.cones = cones;
+        this.balls = balls;
+        this.magnum = magnum;
+    }
 
     public int getIceRockets() {return iceRockets;}
 

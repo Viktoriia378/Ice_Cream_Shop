@@ -13,9 +13,7 @@ public class IceCreamSalon implements IceCreamSeller{
     }
 
     @Override
-    public double getProfit() {
-        return totalProfit;
-    }
+    public double getProfit() {return totalProfit;}
     @Override
     public Cone orderCone(Cone.Flavor[] balls) {
         totalProfit += balls.length * priceList.getBallPrice();

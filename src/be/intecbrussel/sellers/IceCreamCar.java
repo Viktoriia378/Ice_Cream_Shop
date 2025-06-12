@@ -48,7 +48,7 @@ public class IceCreamCar implements IceCreamSeller{
 
     @Override
     public double getProfit() {
-        return 0;
+        return profit;
     }
     private Cone prepareCone(Cone.Flavor[] flavors){
         return new Cone(flavors);
